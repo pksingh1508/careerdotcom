@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useLocale } from "next-intl";
 import { motion } from "framer-motion";
 import { TestimonialItem, TestimonialResponse } from "@/lib/strapi";
 import { SingleOneTestimonial } from "@/components/testimonials/SingleOneTestimonial";
@@ -12,7 +11,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Star,
-  Search,
+  Search
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -29,12 +28,11 @@ export function AllTestimonials() {
     page: 1,
     pageSize: 10,
     pageCount: 1,
-    total: 0,
+    total: 0
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const locale = useLocale();
   const testimonialRef = useRef<HTMLDivElement>(null);
 
   const fetchTestimonials = async (page: number = 1) => {
@@ -43,7 +41,7 @@ export function AllTestimonials() {
       setError(null);
 
       const response = await fetch(
-        `/api/all-testimonial?locale=${locale}&page=${page}&pageSize=10`
+        `/api/all-testimonial?locale=en&page=${page}&pageSize=10`
       );
 
       if (!response.ok) {
@@ -68,7 +66,7 @@ export function AllTestimonials() {
 
   useEffect(() => {
     fetchTestimonials(1);
-  }, [locale]);
+  }, []);
 
   const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= pagination.pageCount) {
@@ -76,7 +74,7 @@ export function AllTestimonials() {
       // Scroll to top when page changes
       window.scrollTo({
         top: testimonialRef.current?.offsetTop,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     }
   };
@@ -159,8 +157,8 @@ export function AllTestimonials() {
                 page === pagination.page
                   ? "bg-amber-500 text-white shadow-lg"
                   : page === "..."
-                    ? "text-gray-400 cursor-not-allowed"
-                    : "text-gray-600 hover:bg-gray-100"
+                  ? "text-gray-400 cursor-not-allowed"
+                  : "text-gray-600 hover:bg-gray-100"
               }`}
             >
               {page}
@@ -184,7 +182,7 @@ export function AllTestimonials() {
 
   if (loading && pagination.page === 1) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50/30">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col items-center justify-center min-h-[400px]">
@@ -198,7 +196,7 @@ export function AllTestimonials() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50/30">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
@@ -222,13 +220,13 @@ export function AllTestimonials() {
   return (
     <div
       ref={testimonialRef}
-      className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30 relative overflow-hidden"
+      className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50/30 relative overflow-hidden"
     >
       {/* Background decorations */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-amber-400/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-purple-400/3 to-pink-400/3 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-linear-to-r from-purple-400/3 to-pink-400/3 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 py-16 relative z-10">

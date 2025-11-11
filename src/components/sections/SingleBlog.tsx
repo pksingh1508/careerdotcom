@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { BlogItem } from "@/lib/strapi";
 import Image from "next/image";
-import { useLocale } from "next-intl";
 import { fontInter } from "@/fonts";
 
 interface SingleBlogProps {
@@ -17,7 +16,6 @@ export function SingleBlog({ blog }: SingleBlogProps) {
   const slug = blog.attributes?.slug || blog.slug || "";
   const image_url = blog.blog_image?.url || "";
   const short_desc = blog.attributes?.short_desc || blog.short_desc || "";
-  const locale = useLocale();
   const URL = process.env.NEXT_PUBLIC_CMS_URL;
 
   // Format the date to show like "03 Jun"
@@ -26,7 +24,7 @@ export function SingleBlog({ blog }: SingleBlogProps) {
     const date = new Date(dateString);
     const options: Intl.DateTimeFormatOptions = {
       day: "2-digit",
-      month: "short",
+      month: "short"
     };
     return date.toLocaleDateString("en-US", options);
   };
@@ -53,7 +51,7 @@ export function SingleBlog({ blog }: SingleBlogProps) {
       {/* Blog Content */}
       <div className="p-2">
         {/* Title */}
-        <Link href={`${locale}/blog/${slug}`}>
+        <Link href={`/blog/${slug}`}>
           <h3
             className={`text-lg font-semibold text-gray-800 leading-tight hover:text-yellow-600 cursor-pointer transition-colors mb-3 line-clamp-2 ${fontInter.className}`}
           >
@@ -64,7 +62,7 @@ export function SingleBlog({ blog }: SingleBlogProps) {
           <p className={`text-gray-600 line-clamp-2 ${fontInter.className}`}>
             {short_desc}
           </p>
-          <Link href={`${locale}/blog/${slug}`}>
+          <Link href={`/blog/${slug}`}>
             <span
               className={`text-yellow-600 cursor-pointer hover:underline ml-1 ${fontInter.className}`}
             >

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { NewsItem, StrapiResponse } from "@/lib/strapi";
 import { SingleImmigrationNews } from "./SingleImmigrationNews";
@@ -11,8 +10,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Search,
-  Filter,
-  Calendar,
+  Calendar
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LatestNewsPost } from "./LatestNewsPost";
@@ -30,53 +28,44 @@ export function ImmigrationNewsSection() {
     page: 1,
     pageSize: 10,
     pageCount: 1,
-    total: 0,
+    total: 0
   });
 
   // UI state
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const t = useTranslations("pagination");
-  const tNews = useTranslations("immigrationPage");
 
-  const locale = useLocale();
+  const fetchNews = useCallback(async (page: number) => {
+    try {
+      setLoading(true);
+      setError(null);
 
-  const fetchNews = useCallback(
-    async (page: number) => {
-      try {
-        setLoading(true);
-        setError(null);
+      const response = await fetch(
+        `/api/immigration-news?locale=en&page=${page}&pageSize=10`
+      );
 
-        const response = await fetch(
-          `/api/immigration-news?locale=${locale}&page=${page}&pageSize=10`
-        );
-
-        if (!response.ok) {
-          throw new Error(`Failed to fetch news: ${response.statusText}`);
-        }
-
-        const data: StrapiResponse = await response.json();
-        const newsItems = data.data || [];
-
-        setCurrentNews(newsItems);
-
-        if (data.meta?.pagination) {
-          setPagination(data.meta.pagination);
-        }
-      } catch (err) {
-        console.error("Error fetching immigration news:", err);
-        setError(
-          err instanceof Error
-            ? err.message
-            : "Failed to fetch immigration news"
-        );
-      } finally {
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch news: ${response.statusText}`);
       }
-    },
-    [locale]
-  );
+
+      const data: StrapiResponse = await response.json();
+      const newsItems = data.data || [];
+
+      setCurrentNews(newsItems);
+
+      if (data.meta?.pagination) {
+        setPagination(data.meta.pagination);
+      }
+    } catch (err) {
+      console.error("Error fetching immigration news:", err);
+      setError(
+        err instanceof Error ? err.message : "Failed to fetch immigration news"
+      );
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     fetchNews(1);
@@ -164,7 +153,7 @@ export function ImmigrationNewsSection() {
           className="flex items-center gap-2"
         >
           <ChevronLeft className="w-4 h-4" />
-          {t("previous")}
+          Previous
         </Button>
 
         <div className="flex items-center gap-1">
@@ -177,8 +166,8 @@ export function ImmigrationNewsSection() {
                 page === pagination.page
                   ? "bg-amber-500 text-white shadow-lg"
                   : page === "..."
-                    ? "text-gray-400 cursor-not-allowed"
-                    : "text-gray-600 hover:bg-gray-100"
+                  ? "text-gray-400 cursor-not-allowed"
+                  : "text-gray-600 hover:bg-gray-100"
               }`}
             >
               {page}
@@ -193,7 +182,7 @@ export function ImmigrationNewsSection() {
           disabled={pagination.page >= pagination.pageCount}
           className="flex items-center gap-2"
         >
-          {t("next")}
+          Next
           <ChevronRight className="w-4 h-4" />
         </Button>
       </div>
@@ -202,7 +191,7 @@ export function ImmigrationNewsSection() {
 
   if (loading && pagination.page === 1) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50/30">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col items-center justify-center min-h-[400px]">
@@ -216,7 +205,7 @@ export function ImmigrationNewsSection() {
 
   if (error && currentNews.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50/30">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
@@ -238,12 +227,12 @@ export function ImmigrationNewsSection() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50/30 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-400/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-purple-400/3 to-pink-400/3 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-linear-to-r from-purple-400/3 to-pink-400/3 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 py-16 relative z-10">
@@ -258,7 +247,7 @@ export function ImmigrationNewsSection() {
             >
               <Newspaper className="w-5 h-5 text-yellow-500" />
               <span className="text-yellow-500 font-semibold text-sm uppercase tracking-wide">
-                {tNews("title")}
+                IMMIGRATION NEWS
               </span>
             </motion.div>
 
@@ -268,7 +257,7 @@ export function ImmigrationNewsSection() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
             >
-              {tNews("heading")}
+              Latest Immigration Updates
             </motion.h1>
 
             <motion.p
@@ -277,7 +266,8 @@ export function ImmigrationNewsSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8"
             >
-              {tNews("description")}
+              Stay informed with the latest immigration news, policy changes,
+              and important updates from around the world
             </motion.p>
 
             {/* Stats */}
@@ -292,7 +282,7 @@ export function ImmigrationNewsSection() {
                   {pagination.total}
                 </div>
                 <div className="text-sm text-gray-500 font-medium">
-                  {tNews("totalArticle")}
+                  Total Articles
                 </div>
               </div>
               <div className="w-px h-12 bg-gray-300" />
@@ -301,16 +291,7 @@ export function ImmigrationNewsSection() {
                   {pagination.pageCount}
                 </div>
                 <div className="text-sm text-gray-500 font-medium">
-                  {tNews("totalPage")}
-                </div>
-              </div>
-              <div className="w-px h-12 bg-gray-300" />
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-yellow-500 mb-1">
-                  {pagination.pageCount}
-                </div>
-                <div className="text-sm text-gray-500 font-medium">
-                  {tNews("totalPage")}
+                  Total Pages
                 </div>
               </div>
             </motion.div>
@@ -340,7 +321,7 @@ export function ImmigrationNewsSection() {
                 disabled={loading}
               >
                 <Calendar className="w-4 h-4" />
-                {loading ? "Refreshing..." : `${tNews("refresh")}`}
+                {loading ? "Refreshing..." : "Refresh"}
               </Button>
             </motion.div>
           </div>

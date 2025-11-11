@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Heart, Calendar, ArrowRight, BookOpen } from "lucide-react";
-import { useLocale } from "next-intl";
 
 interface SingleBlogSectionProps {
   blog: BlogItem;
@@ -13,7 +12,6 @@ interface SingleBlogSectionProps {
 }
 
 export function SingleBlogSection({ blog, index = 0 }: SingleBlogSectionProps) {
-  const locale = useLocale();
   const URL = process.env.NEXT_PUBLIC_CMS_URL;
 
   // Extract data with fallback handling for both Strapi attribute structure and flat structure
@@ -27,7 +25,7 @@ export function SingleBlogSection({ blog, index = 0 }: SingleBlogSectionProps) {
     blog_image:
       blog.attributes?.blog_image?.data?.attributes?.url ||
       blog.blog_image?.url ||
-      null,
+      null
   };
 
   // Format date
@@ -37,7 +35,7 @@ export function SingleBlogSection({ blog, index = 0 }: SingleBlogSectionProps) {
       return new Date(dateString).toLocaleDateString("en-US", {
         year: "numeric",
         month: "short",
-        day: "numeric",
+        day: "numeric"
       });
     } catch {
       return "";
@@ -59,12 +57,12 @@ export function SingleBlogSection({ blog, index = 0 }: SingleBlogSectionProps) {
       y: 0,
       transition: {
         duration: 0.6,
-        delay: index * 0.1,
-      },
-    },
+        delay: index * 0.1
+      }
+    }
   };
 
-  const blogUrl = `/${locale}/blog/${data.slug}`;
+  const blogUrl = `/blog/${data.slug}`;
 
   return (
     <motion.article
@@ -77,7 +75,7 @@ export function SingleBlogSection({ blog, index = 0 }: SingleBlogSectionProps) {
       <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-purple-200">
         <div className="flex flex-col md:flex-row">
           {/* Left side - Image */}
-          <div className="md:w-80 md:flex-shrink-0">
+          <div className="md:w-80 md:shrink-0">
             <div className="relative h-44 md:h-full md:min-h-[200px] overflow-hidden">
               {data.blog_image ? (
                 <Image
@@ -87,7 +85,7 @@ export function SingleBlogSection({ blog, index = 0 }: SingleBlogSectionProps) {
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
+                <div className="w-full h-full bg-linear-to-br from-purple-400 to-pink-500 flex items-center justify-center">
                   <div className="text-center text-white">
                     <BookOpen className="w-8 h-8 mx-auto mb-2" />
                     <p className="text-sm font-medium">Blog Post</p>
@@ -96,7 +94,7 @@ export function SingleBlogSection({ blog, index = 0 }: SingleBlogSectionProps) {
               )}
 
               {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
 
               {/* Likes badge */}
               <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-md">

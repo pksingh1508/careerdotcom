@@ -1,11 +1,8 @@
 "use client";
-
-import * as React from "react";
-import { fontPoppins, fontInter, fontMontserrat } from "@/fonts";
+import { fontInter } from "@/fonts";
 import { RippleButton } from "@/components/ui/ripple-button";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
 
 interface ButtonData {
   text: string;
@@ -38,13 +35,12 @@ export function CustomHero({
   buttons,
   isReversed = false,
   imageSrc,
-  imageAlt = "Hero image",
+  imageAlt = "Hero image"
 }: CustomHeroProps) {
   const router = useRouter();
-  const locale = useLocale();
 
   const handleButtonClick = () => {
-    router.push(`/${locale}/contact`);
+    router.push(`/contact`);
   };
 
   return (
@@ -126,7 +122,7 @@ export function CustomHero({
                 />
               </div>
             ) : (
-              <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-br from-yellow-100 to-yellow-200 aspect-[4/3] flex items-center justify-center">
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-linear-to-br from-yellow-100 to-yellow-200 aspect-4/3 flex items-center justify-center">
                 <div className="text-center space-y-4 p-8">
                   <div className="w-16 h-16 bg-yellow-400 rounded-full mx-auto flex items-center justify-center">
                     <svg

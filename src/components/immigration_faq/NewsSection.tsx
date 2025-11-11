@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { ImmigrationNews } from "./ImmigrationNews";
 import { SomeFAQ } from "./SomeFAQ";
 

@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Eye, Calendar, ArrowRight } from "lucide-react";
-import { useLocale } from "next-intl";
 
 interface SingleImmigrationNewsProps {
   news: NewsItem;
@@ -14,9 +13,8 @@ interface SingleImmigrationNewsProps {
 
 export function SingleImmigrationNews({
   news,
-  index = 0,
+  index = 0
 }: SingleImmigrationNewsProps) {
-  const locale = useLocale();
   const URL = process.env.NEXT_PUBLIC_CMS_URL;
 
   // Extract data with fallback handling for both Strapi attribute structure and flat structure
@@ -35,7 +33,7 @@ export function SingleImmigrationNews({
     news_image:
       news.attributes?.news_image?.data?.attributes?.url ||
       news.news_image?.url ||
-      null,
+      null
   };
 
   // Format date
@@ -45,7 +43,7 @@ export function SingleImmigrationNews({
       return new Date(dateString).toLocaleDateString("en-US", {
         year: "numeric",
         month: "short",
-        day: "numeric",
+        day: "numeric"
       });
     } catch {
       return "";
@@ -57,11 +55,11 @@ export function SingleImmigrationNews({
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
-      y: 0,
-    },
+      y: 0
+    }
   };
 
-  const newsUrl = `/${locale}/immigration-news/${data.slug}`;
+  const newsUrl = `/immigration-news/${data.slug}`;
 
   return (
     <motion.article
@@ -74,7 +72,7 @@ export function SingleImmigrationNews({
       <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-amber-200">
         <div className="flex flex-col md:flex-row">
           {/* Left side - Image */}
-          <div className="md:w-80 md:flex-shrink-0">
+          <div className="md:w-80 md:shrink-0">
             <div className="relative h-48 md:h-full md:min-h-[200px] overflow-hidden">
               {data.news_image ? (
                 <Image
@@ -84,7 +82,7 @@ export function SingleImmigrationNews({
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                <div className="w-full h-full bg-linear-to-br from-blue-400 to-purple-500 flex items-center justify-center">
                   <div className="text-center text-white">
                     <Calendar className="w-8 h-8 mx-auto mb-2" />
                     <p className="text-sm font-medium">News Image</p>
@@ -93,7 +91,7 @@ export function SingleImmigrationNews({
               )}
 
               {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
             </div>
           </div>
 

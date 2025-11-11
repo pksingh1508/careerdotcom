@@ -24,9 +24,9 @@ export async function POST(req: Request) {
     message: message,
     status: "new",
     source: {
-      channel: "eucareerserwis.pl",
-      compaign: `${option}`,
-    },
+      channel: "eucareerserwis.com",
+      compaign: `${option}`
+    }
   };
 
   // check if api key is present
@@ -39,9 +39,9 @@ export async function POST(req: Request) {
     method: "POST",
     headers: {
       "x-api-key": API_KEY,
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(data)
   });
 
   const crmData = await crmResponse.json();

@@ -1,11 +1,6 @@
 "use client";
-import { motion, easeOut, Variants } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { BlogItem } from "@/lib/strapi";
-import { useLocaleStore } from "@/store/useLocaleStore";
-import { useTranslations } from "@/hooks/useTranslations";
-import { RippleButton } from "../ui/ripple-button";
-import { useRouter } from "next/navigation";
 import { SingleLatestPost } from "./SingleLatestPost";
 import { Loader2 } from "lucide-react";
 
@@ -13,9 +8,6 @@ export function LatestBlogPost() {
   const [blogs, setBlogs] = useState<BlogItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { locale } = useLocaleStore();
-  const t = useTranslations("RecentBlogs");
-  const router = useRouter();
 
   useEffect(() => {
     const loadBlogs = async () => {
@@ -23,9 +15,7 @@ export function LatestBlogPost() {
         setLoading(true);
         setError(null);
 
-        const response = await fetch(
-          `/api/recent-blog?pageSize=5&locale=${locale}`
-        );
+        const response = await fetch(`/api/recent-blog?pageSize=5&locale=en`);
 
         if (!response.ok) {
           const errorData = await response.json();
@@ -42,7 +32,7 @@ export function LatestBlogPost() {
     };
 
     loadBlogs();
-  }, [locale]);
+  }, []);
 
   if (loading) {
     return (
@@ -52,7 +42,7 @@ export function LatestBlogPost() {
             {/* Header */}
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                {t("heading") || "Recent Blogs"}
+                Recent Blogs
               </h2>
               <div className="h-1 bg-yellow-500 rounded w-24 mx-auto"></div>
             </div>

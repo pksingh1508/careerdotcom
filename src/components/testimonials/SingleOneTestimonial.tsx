@@ -12,7 +12,7 @@ interface SingleOneTestimonialProps {
 
 export function SingleOneTestimonial({
   testimonial,
-  index = 0,
+  index = 0
 }: SingleOneTestimonialProps) {
   const URL = process.env.NEXT_PUBLIC_CMS_URL;
   // Extract data with fallback handling for both Strapi attribute structure and flat structure
@@ -29,7 +29,7 @@ export function SingleOneTestimonial({
     user_image:
       testimonial.attributes?.user_image?.data?.attributes?.url ||
       testimonial.user_image?.url ||
-      null,
+      null
   };
 
   // Animation variants
@@ -37,8 +37,8 @@ export function SingleOneTestimonial({
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
-      y: 0,
-    },
+      y: 0
+    }
   };
 
   return (
@@ -52,7 +52,7 @@ export function SingleOneTestimonial({
       <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
         <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
           {/* Left side - Image */}
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <div className="rounded-xl overflow-hidden shadow-md">
               {data.user_image ? (
                 <Image
@@ -63,7 +63,7 @@ export function SingleOneTestimonial({
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                <div className="w-full h-full bg-linear-to-br from-blue-400 to-purple-500 flex items-center justify-center">
                   <User className="w-8 h-8 md:w-12 md:h-12 text-white" />
                 </div>
               )}

@@ -23,19 +23,19 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         // Brand-specific variants using colors constants
         brand: "text-[color:var(--brand-fg)] shadow-xs",
-        brandOutline: "border text-[color:var(--brand-fg)]",
+        brandOutline: "border text-[color:var(--brand-fg)]"
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-9",
-      },
+        icon: "size-9"
+      }
     },
     defaultVariants: {
       variant: "default",
-      size: "default",
-    },
+      size: "default"
+    }
   }
 );
 
@@ -60,10 +60,10 @@ function Button({
           ? `[--brand-bg:${colors.yellow.DEFAULT}] [--brand-fg:${colors.black.light}]`
           : undefined,
         variant === "brand"
-          ? "bg-[var(--brand-bg)] hover:brightness-95"
+          ? "bg-(--brand-bg) hover:brightness-95"
           : variant === "brandOutline"
-            ? "border-[var(--brand-bg)] hover:bg-[var(--brand-bg)] hover:text-[var(--brand-fg)]/90"
-            : undefined,
+          ? "border-(--brand-bg) hover:bg-(--brand-bg) hover:text-(--brand-fg)/90"
+          : undefined,
         buttonVariants({ variant, size, className })
       )}
       {...props}

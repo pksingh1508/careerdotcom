@@ -28,7 +28,7 @@ export function Navbar() {
     if (href === "/") {
       return pathname === `/`;
     }
-    return pathname === `/${href}` || pathname.startsWith(`/${href}/`);
+    return pathname === `${href}` || pathname.startsWith(`${href}/`);
   };
 
   useEffect(() => {

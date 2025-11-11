@@ -29,17 +29,21 @@ export function StepWorkBulletPoint({
   bullet5,
   bullet6,
   bullet7,
-  isReversed = false,
+  isReversed = false
 }: StepWorkBulletPointProps) {
   return (
     <div className="w-full">
       <div className="container mx-auto max-w-7xl px-4 lg:py-16 py-8">
         <div
-          className={`grid lg:grid-cols-2 gap-12 lg:gap-16 ${isReversed ? "lg:flex-row-reverse" : ""}`}
+          className={`grid lg:grid-cols-2 gap-12 lg:gap-16 ${
+            isReversed ? "lg:flex-row-reverse" : ""
+          }`}
         >
           {/* Image Section */}
           <div
-            className={`flex justify-center ${isReversed ? "lg:justify-end" : "lg:justify-start"} ${isReversed ? "lg:order-2" : "lg:order-1"}`}
+            className={`flex justify-center ${
+              isReversed ? "lg:justify-end" : "lg:justify-start"
+            } ${isReversed ? "lg:order-2" : "lg:order-1"}`}
           >
             <div className="relative w-full h-auto max-w-lg">
               <Image
@@ -66,7 +70,7 @@ export function StepWorkBulletPoint({
             <div className="space-y-1">
               {bullet1 && (
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 shrink-0"></div>
                   <p
                     className={`font-inter text-gray-600 dark:text-gray-300 leading-relaxed ${fontInter.className}`}
                   >
@@ -77,7 +81,7 @@ export function StepWorkBulletPoint({
 
               {bullet2 && (
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 shrink-0"></div>
                   <p
                     className={`font-inter text-gray-600 dark:text-gray-300 leading-relaxed ${fontInter.className}`}
                   >
@@ -88,7 +92,7 @@ export function StepWorkBulletPoint({
 
               {bullet3 && (
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 shrink-0"></div>
                   <p
                     className={`font-inter text-gray-600 dark:text-gray-300 leading-relaxed ${fontInter.className}`}
                   >
@@ -99,7 +103,7 @@ export function StepWorkBulletPoint({
 
               {bullet4 && (
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 shrink-0"></div>
                   <p
                     className={`font-inter text-gray-600 dark:text-gray-300 leading-relaxed ${fontInter.className}`}
                   >
@@ -110,7 +114,7 @@ export function StepWorkBulletPoint({
 
               {bullet5 && (
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 shrink-0"></div>
                   <p
                     className={`font-inter text-gray-600 dark:text-gray-300 leading-relaxed ${fontInter.className}`}
                   >
@@ -121,7 +125,7 @@ export function StepWorkBulletPoint({
 
               {bullet6 && (
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 shrink-0"></div>
                   <p
                     className={`font-inter text-gray-600 dark:text-gray-300 leading-relaxed ${fontInter.className}`}
                   >
@@ -132,7 +136,7 @@ export function StepWorkBulletPoint({
 
               {bullet7 && (
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2.5 mr-3 shrink-0"></div>
                   <p
                     className={`font-inter text-gray-600 dark:text-gray-300 leading-relaxed ${fontInter.className}`}
                   >

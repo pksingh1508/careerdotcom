@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useLocale } from "next-intl";
 import { NewsItem } from "@/lib/strapi";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -19,28 +18,20 @@ import {
   Share2,
   Clock,
   Loader2,
-  AlertCircle,
+  AlertCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import "highlight.js/styles/github.css";
 import { LatestNewsPost } from "@/components/immigration_news/LatestNewsPost";
-import { StructuredData } from "@/components/seo/StructuredData";
-import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
-import {
-  generateArticleSchema,
-  organizationSchema,
-} from "@/lib/seo/structuredData";
 
 interface NewsArticleClientProps {
   slug: string;
-  lang?: string;
 }
 
 export function NewsArticleClient({ slug }: NewsArticleClientProps) {
   const [news, setNews] = useState<NewsItem | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const locale = useLocale();
   const URL = process.env.NEXT_PUBLIC_CMS_URL;
 
   useEffect(() => {
@@ -49,9 +40,7 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
         setLoading(true);
         setError(null);
 
-        const response = await fetch(
-          `/api/single-news?slug=${slug}&locale=${locale}`
-        );
+        const response = await fetch(`/api/single-news?slug=${slug}&locale=en`);
 
         if (!response.ok) {
           if (response.status === 404) {
@@ -75,7 +64,7 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
     if (slug) {
       fetchSingleNews();
     }
-  }, [slug, locale]);
+  }, [slug]);
 
   const newsData = news
     ? {
@@ -90,7 +79,7 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
         news_image:
           news.attributes?.news_image?.data?.attributes?.url ||
           news.news_image?.url ||
-          null,
+          null
       }
     : null;
 
@@ -102,7 +91,7 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
         month: "long",
         day: "numeric",
         hour: "2-digit",
-        minute: "2-digit",
+        minute: "2-digit"
       });
     } catch {
       return "";
@@ -123,7 +112,7 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
         await navigator.share({
           title: newsData.title,
           text: `Check out this article: ${newsData.title}`,
-          url: window.location.href,
+          url: window.location.href
         });
       } catch (err) {
         console.log("Error sharing:", err);
@@ -135,7 +124,7 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50/30 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin text-yellow-500 mx-auto mb-4" />
         </div>
@@ -145,7 +134,7 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
 
   if (error || !newsData) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50/30 flex items-center justify-center">
         <div className="text-center max-w-md mx-auto px-4">
           <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
@@ -154,7 +143,7 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
           <p className="text-gray-600 mb-6">
             {error || "The requested article could not be found."}
           </p>
-          <Link href={`/${locale}/immigration-news`}>
+          <Link href={`/immigration-news`}>
             <Button className="flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" />
               Back to News
@@ -167,38 +156,16 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
 
   const tags = parseTags(newsData.tags);
 
-  const articleSchema = generateArticleSchema(
-    newsData.title,
-    newsData.contents.substring(0, 160) + "...",
-    newsData.updatedAt,
-    newsData.updatedAt,
-    newsData.news_image || undefined
-  );
-
-  const structuredData = [organizationSchema, articleSchema];
-
-  const breadcrumbItems = [
-    { name: "Immigration News", href: `/${locale}/immigration-news` },
-    {
-      name: newsData.title,
-      href: `/${locale}/immigration-news/${newsData.slug}`,
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
-      <StructuredData data={structuredData} />
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50/30">
       <div className="max-w-7xl grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-4 mx-auto">
         <article className="container mx-auto px-3 py-12">
-          <div className="mb-6">
-            <Breadcrumbs items={breadcrumbItems} />
-          </div>
           {newsData.news_image && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="relative w-full h-64 md:h-[30rem] rounded-2xl overflow-hidden mb-8 shadow-xl"
+              className="relative w-full h-64 md:h-120 rounded-2xl overflow-hidden mb-8 shadow-xl"
             >
               <Image
                 src={`${URL}${newsData.news_image}`}
@@ -207,7 +174,7 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
                 className="object-cover"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
             </motion.div>
           )}
 
@@ -231,8 +198,7 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
                 {newsData.views} views
               </div>
               <div className="flex items-center gap-2 bg-orange-50 rounded-full px-4 py-2 text-orange-600">
-                <Clock className="w-4 h-4" />
-                4 min read
+                <Clock className="w-4 h-4" />4 min read
               </div>
             </div>
 
@@ -326,8 +292,8 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
                     const finalHref = isAbsoluteUrl
                       ? href
                       : href.startsWith("/")
-                        ? href
-                        : `https://${href}`;
+                      ? href
+                      : `https://${href}`;
 
                     return (
                       <a
@@ -346,7 +312,7 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
                         }
                       />
                     );
-                  },
+                  }
                 }}
               >
                 {newsData.contents}
@@ -375,7 +341,7 @@ export function NewsArticleClient({ slug }: NewsArticleClientProps) {
                   Share
                 </Button>
               </div>
-              <Link href={`/${locale}/immigration-news`}>
+              <Link href={`/immigration-news`}>
                 <Button variant="ghost" className="flex items-center gap-2">
                   <ArrowLeft className="w-4 h-4" />
                   Back to All News

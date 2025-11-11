@@ -2,8 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { NewsItem } from "@/lib/strapi";
-import { useTranslations } from "@/hooks/useTranslations";
-import { useLocaleStore } from "@/store/useLocaleStore";
 import { Loader2 } from "lucide-react";
 import { SingleLatestNews } from "./SingleLatestNews";
 
@@ -11,8 +9,6 @@ export function LatestNewsPost() {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const t = useTranslations("ImmigrationNews");
-  const { locale } = useLocaleStore();
 
   useEffect(() => {
     const loadNews = async () => {
@@ -21,7 +17,7 @@ export function LatestNewsPost() {
         setError(null);
 
         const response = await fetch(
-          `/api/recent-news?locale=${locale}&page=1&pageSize=7`
+          `/api/recent-news?locale=en&page=1&pageSize=7`
         );
 
         if (!response.ok) {
@@ -40,7 +36,7 @@ export function LatestNewsPost() {
     };
 
     loadNews();
-  }, [locale]);
+  }, []);
 
   if (loading) {
     return (
@@ -48,7 +44,7 @@ export function LatestNewsPost() {
         {/* Header */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            {t("heading") || "Immigration News"}
+            Immigration News
           </h2>
           <div className="h-1 bg-yellow-500 rounded w-16"></div>
         </div>
@@ -65,7 +61,7 @@ export function LatestNewsPost() {
         {/* Header */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            {t("heading") || "Immigration News"}
+            Immigration News
           </h2>
           <div className="h-1 bg-yellow-500 rounded w-16"></div>
         </div>
@@ -82,7 +78,7 @@ export function LatestNewsPost() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">{t("latest")}</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">Latest</h2>
         <div className="h-1 bg-yellow-500 rounded w-16"></div>
       </div>
 

@@ -107,7 +107,7 @@ export function Footer() {
                 {solutionLinks.map((link) => (
                   <li key={link.href}>
                     <Link
-                      href={`/${link.href}`}
+                      href={`${link.href}`}
                       className={`text-gray-600 hover:text-yellow-500 transition-colors duration-200 text-sm ${fontInter.className}`}
                     >
                       {link.label}
@@ -157,7 +157,7 @@ export function Footer() {
                 {updatedLinks.map((link) => (
                   <li key={link.href}>
                     <Link
-                      href={`/${link.href}`}
+                      href={`${link.href}`}
                       className={`text-gray-600 hover:text-yellow-500 transition-colors duration-200 text-sm ${fontInter.className}`}
                     >
                       {link.label}
@@ -207,7 +207,7 @@ export function Footer() {
                 {successStoryLinks.map((link) => (
                   <li key={link.href}>
                     <Link
-                      href={`/${link.href}`}
+                      href={`${link.href}`}
                       className={`text-gray-600 hover:text-yellow-500 transition-colors duration-200 text-sm ${fontInter.className}`}
                     >
                       {link.label}
@@ -265,7 +265,7 @@ export function Footer() {
                 {termsLinks.map((link) => (
                   <li key={link.href}>
                     <Link
-                      href={`/${link.href}`}
+                      href={`${link.href}`}
                       className={`text-gray-600 hover:text-yellow-500 transition-colors duration-200 text-sm ${fontInter.className}`}
                     >
                       {link.label}

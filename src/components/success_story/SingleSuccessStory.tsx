@@ -11,7 +11,7 @@ interface SingleSuccessStoryProps {
 
 export function SingleSuccessStory({
   successStory,
-  index,
+  index
 }: SingleSuccessStoryProps) {
   const URL = process.env.NEXT_PUBLIC_CMS_URL;
   // Get values from both nested and flat structure
@@ -36,7 +36,7 @@ export function SingleSuccessStory({
       return new Date(dateString).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
-        day: "numeric",
+        day: "numeric"
       });
     } catch {
       return "";
@@ -89,7 +89,7 @@ export function SingleSuccessStory({
       <div className="hidden lg:flex lg:items-start lg:gap-6">
         {/* Image on the left */}
         {imageUrl && (
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <div className="relative w-24 h-24">
               <Image
                 src={fullImageUrl}

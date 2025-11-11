@@ -11,10 +11,9 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
-  Download,
+  Download
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTranslations } from "next-intl";
 
 interface InitialMeta {
   currentPage: number;
@@ -29,31 +28,25 @@ interface AllPermitImageProps {
 
 export function AllPermitImage({
   initialPermits = [],
-  initialMeta,
+  initialMeta
 }: AllPermitImageProps) {
-  const [permitImages, setPermitImages] = useState<PermitItem[]>(
-    initialPermits
-  );
+  const [permitImages, setPermitImages] =
+    useState<PermitItem[]>(initialPermits);
   const [loading, setLoading] = useState(initialPermits.length === 0);
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null
   );
-  const [currentPage, setCurrentPage] = useState(
-    initialMeta?.currentPage ?? 1
-  );
+  const [currentPage, setCurrentPage] = useState(initialMeta?.currentPage ?? 1);
   const [hasNextPage, setHasNextPage] = useState(
     initialMeta?.hasNextPage ?? true
   );
-  const [totalPages, setTotalPages] = useState(
-    initialMeta?.totalPages ?? 0
-  );
+  const [totalPages, setTotalPages] = useState(initialMeta?.totalPages ?? 0);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const lastImageRef = useRef<HTMLDivElement | null>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const skipInitialFetchRef = useRef(initialPermits.length > 0);
-  const t = useTranslations("workPermit");
   const URL = process.env.NEXT_PUBLIC_CMS_URL;
 
   const fetchPermitImages = useCallback(
@@ -145,7 +138,7 @@ export function AllPermitImage({
         console.log("Scroll check - conditions not met:", {
           loadingMore,
           hasNextPage,
-          loading,
+          loading
         });
         return;
       }
@@ -172,7 +165,7 @@ export function AllPermitImage({
     hasNextPage,
     loading,
     currentPage,
-    permitImages.length,
+    permitImages.length
   ]);
 
   // Set up scroll event listener
@@ -204,7 +197,7 @@ export function AllPermitImage({
     const option = {
       root: null,
       rootMargin: "200px", // Load more when user is 200px from the element
-      threshold: 0.1,
+      threshold: 0.1
     };
 
     observerRef.current = new IntersectionObserver(handleObserver, option);
@@ -287,7 +280,7 @@ export function AllPermitImage({
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50/30">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-purple-50/30">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col items-center justify-center min-h-[400px]">
@@ -301,7 +294,7 @@ export function AllPermitImage({
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50/30">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-purple-50/30">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
@@ -326,7 +319,7 @@ export function AllPermitImage({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50/30 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-purple-50/30 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-400/5 rounded-full blur-3xl" />
@@ -345,7 +338,7 @@ export function AllPermitImage({
             >
               <FileImage className="w-5 h-5 text-yellow-600" />
               <span className="text-yellow-600 font-semibold text-sm uppercase tracking-wide">
-                {t("title")}
+                WORK PERMIT
               </span>
             </motion.div>
 
@@ -355,7 +348,7 @@ export function AllPermitImage({
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
             >
-              {t("heading")}
+              Work Permit Gallery
             </motion.h1>
 
             <motion.p
@@ -364,7 +357,7 @@ export function AllPermitImage({
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8"
             >
-              {t("description")}
+              Browse through our collection of successful work permit approvals
             </motion.p>
           </div>
 
@@ -400,7 +393,7 @@ export function AllPermitImage({
                     onClick={() => handleImageClick(index)}
                   >
                     {/* Image */}
-                    <div className="relative aspect-[3/4] overflow-hidden">
+                    <div className="relative aspect-3/4 overflow-hidden">
                       <Image
                         src={imageUrl}
                         alt={`Work Permit ${index + 1}`}

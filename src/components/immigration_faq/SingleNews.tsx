@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { useLocale } from "next-intl";
 import { NewsItem } from "@/lib/strapi";
 import { fontInter } from "@/fonts";
 
@@ -9,8 +8,6 @@ interface SingleNewsProps {
 }
 
 export function SingleNews({ news }: SingleNewsProps) {
-  const locale = useLocale();
-
   // Handle both nested attributes structure and flat structure
   const title = news.attributes?.title || news.title || "Untitled";
   const publishedAt = news.attributes?.updatedAt || news.updatedAt || "";
@@ -30,7 +27,7 @@ export function SingleNews({ news }: SingleNewsProps) {
     const date = new Date(dateString);
     const options: Intl.DateTimeFormatOptions = {
       day: "2-digit",
-      month: "short",
+      month: "short"
     };
     return date.toLocaleDateString("en-US", options);
   };
@@ -39,7 +36,7 @@ export function SingleNews({ news }: SingleNewsProps) {
     <article className="border-b border-gray-200 pb-4 mb-4 last:border-b-0">
       <div className="space-y-3">
         {/* Title */}
-        <Link href={`/${locale}/immigration-news/${slug}`}>
+        <Link href={`/immigration-news/${slug}`}>
           <h3
             className={`text-lg font-semibold text-gray-800 leading-tight hover:text-yellow-500 cursor-pointer transition-colors ${fontInter.className}`}
           >
@@ -57,7 +54,7 @@ export function SingleNews({ news }: SingleNewsProps) {
               </span>
 
               {/* Read More */}
-              <Link href={`/${locale}/immigration-news/${slug}`}>
+              <Link href={`/immigration-news/${slug}`}>
                 <span
                   className={`text-yellow-500 cursor-pointer hover:underline ml-1 ${fontInter.className}`}
                 >

@@ -11,10 +11,9 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
-  Download,
+  Download
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTranslations } from "next-intl";
 
 interface InitialMeta {
   currentPage: number;
@@ -29,31 +28,25 @@ interface AllVisaStampProps {
 
 export function AllVisaStampImage({
   initialStamps = [],
-  initialMeta,
+  initialMeta
 }: AllVisaStampProps) {
-  const [stampImages, setStampImages] = useState<VisaStampItem[]>(
-    initialStamps
-  );
+  const [stampImages, setStampImages] =
+    useState<VisaStampItem[]>(initialStamps);
   const [loading, setLoading] = useState(initialStamps.length === 0);
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null
   );
-  const [currentPage, setCurrentPage] = useState(
-    initialMeta?.currentPage ?? 1
-  );
+  const [currentPage, setCurrentPage] = useState(initialMeta?.currentPage ?? 1);
   const [hasNextPage, setHasNextPage] = useState(
     initialMeta?.hasNextPage ?? true
   );
-  const [totalPages, setTotalPages] = useState(
-    initialMeta?.totalPages ?? 0
-  );
+  const [totalPages, setTotalPages] = useState(initialMeta?.totalPages ?? 0);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const lastImageRef = useRef<HTMLDivElement | null>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const skipInitialFetchRef = useRef(initialStamps.length > 0);
-  const t = useTranslations("visaStamp");
   const URL = process.env.NEXT_PUBLIC_CMS_URL;
 
   const fetchStampImages = useCallback(
@@ -145,7 +138,7 @@ export function AllVisaStampImage({
         console.log("Scroll check - conditions not met:", {
           loadingMore,
           hasNextPage,
-          loading,
+          loading
         });
         return;
       }
@@ -167,7 +160,7 @@ export function AllVisaStampImage({
         loadingMore,
         loading,
         currentPage,
-        totalImages: stampImages.length,
+        totalImages: stampImages.length
       });
 
       // Load more when user is within 300px of the bottom
@@ -185,7 +178,7 @@ export function AllVisaStampImage({
     hasNextPage,
     loading,
     currentPage,
-    stampImages.length,
+    stampImages.length
   ]);
 
   // Set up scroll event listener
@@ -217,7 +210,7 @@ export function AllVisaStampImage({
     const option = {
       root: null,
       rootMargin: "200px", // Load more when user is 200px from the element
-      threshold: 0.1,
+      threshold: 0.1
     };
 
     observerRef.current = new IntersectionObserver(handleObserver, option);
@@ -300,7 +293,7 @@ export function AllVisaStampImage({
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50/30">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col items-center justify-center min-h-[400px]">
@@ -314,7 +307,7 @@ export function AllVisaStampImage({
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50/30">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
@@ -339,7 +332,7 @@ export function AllVisaStampImage({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50/30 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/5 rounded-full blur-3xl" />
@@ -358,7 +351,7 @@ export function AllVisaStampImage({
             >
               <Stamp className="w-5 h-5 text-yellow-500" />
               <span className="text-yellow-500 font-semibold text-sm uppercase tracking-wide">
-                {t("title")}
+                VISA STAMP
               </span>
             </motion.div>
 
@@ -368,7 +361,7 @@ export function AllVisaStampImage({
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
             >
-              {t("heading")}
+              Visa Stamp Gallery
             </motion.h1>
 
             <motion.p
@@ -377,7 +370,8 @@ export function AllVisaStampImage({
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8"
             >
-              {t("description")}
+              Explore our collection of successful visa stamp approvals from
+              various countries
             </motion.p>
           </div>
 
@@ -413,7 +407,7 @@ export function AllVisaStampImage({
                     onClick={() => handleImageClick(index)}
                   >
                     {/* Image */}
-                    <div className="relative aspect-[3/4] overflow-hidden">
+                    <div className="relative aspect-3/4 overflow-hidden">
                       <Image
                         src={imageUrl}
                         alt={`Visa Stamp ${index + 1}`}

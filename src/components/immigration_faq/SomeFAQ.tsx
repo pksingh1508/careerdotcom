@@ -1,30 +1,17 @@
 "use client";
 
-import { useTranslations } from "@/hooks/useTranslations";
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
+  AccordionContent
 } from "@/components/ui/accordion";
 import { fontInter } from "@/fonts";
+import { faqContent, someFaqContent } from "@/data/faqData";
 
 export function SomeFAQ() {
-  const t = useTranslations("faq");
-  const t2 = useTranslations("someFAQ");
-
-  const faqKeys = [
-    "choose",
-    "trust",
-    "realJobs",
-    "documents",
-    "industries",
-    "startWork",
-    "support",
-    "employers",
-    "difference",
-    "clients",
-  ] as const;
+  const { heading, description } = someFaqContent;
+  const { questions } = faqContent;
 
   return (
     <section className="relative overflow-hidden">
@@ -33,30 +20,33 @@ export function SomeFAQ() {
           {/* Header */}
           <div className="text-center mb-6">
             <h2
-              className={`text-xl font-bold text-gray-800 mb-4 md:mb-6 ${fontInter.className}`}
+              className={`text-xl font-bold text-gray-800 mb-3 md:mb-4 ${fontInter.className}`}
             >
-              {t2("heading")}
+              {heading}
             </h2>
+            <p className="text-sm md:text-base text-gray-600">
+              {description}
+            </p>
           </div>
 
           {/* FAQ Accordion */}
           <div className="space-y-0">
             <Accordion type="single" className="w-full space-y-3">
-              {faqKeys.map((key, index) => (
+              {questions.map((item, index) => (
                 <AccordionItem
-                  key={key}
-                  value={key}
+                  key={item.key}
+                  value={`faq-${item.key}`}
                   className="border border-white/30 shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   <AccordionTrigger
                     className={`text-left text-base cursor-pointer ${fontInter.className}`}
                   >
-                    {t(`questions.${key}.question`)}
+                    {item.question}
                   </AccordionTrigger>
                   <AccordionContent
                     className={`text-sm ${fontInter.className}`}
                   >
-                    {t(`questions.${key}.answer`)}
+                    {item.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}

@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, use } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { SuccessItem, SuccessStoryResponse } from "@/lib/strapi";
 import { SingleSuccessStory } from "./SingleSuccessStory";
@@ -12,7 +11,7 @@ import {
   ChevronRight,
   Search,
   Star,
-  Calendar,
+  Calendar
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -40,16 +39,13 @@ export function AllSuccessStories() {
     page: 1,
     pageSize: 10,
     pageCount: 1,
-    total: 0,
+    total: 0
   });
 
   // UI state
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const t = useTranslations("successStory");
-  const tP = useTranslations("pagination");
-  const locale = useLocale();
 
   // Cache timeout - 5 minutes
   const CACHE_TIMEOUT = 5 * 60 * 1000;
@@ -76,7 +72,7 @@ export function AllSuccessStories() {
         setError(null);
 
         const response = await fetch(
-          `/api/success-story?locale=${locale}&page=${page}&pageSize=10`
+          `/api/success-story?locale=en&page=${page}&pageSize=10`
         );
 
         if (!response.ok) {
@@ -94,7 +90,7 @@ export function AllSuccessStories() {
             new Map(
               prev.set(page, {
                 data: successStoryItems,
-                timestamp: now,
+                timestamp: now
               })
             )
         );
@@ -113,7 +109,7 @@ export function AllSuccessStories() {
         setLoading(false);
       }
     },
-    [locale, successStoriesCache, CACHE_TIMEOUT]
+    [successStoriesCache, CACHE_TIMEOUT]
   );
 
   useEffect(() => {
@@ -197,7 +193,7 @@ export function AllSuccessStories() {
           className="flex items-center gap-2"
         >
           <ChevronLeft className="w-4 h-4" />
-          {tP("previous")}
+          Previous
         </Button>
 
         <div className="flex items-center gap-1">
@@ -210,8 +206,8 @@ export function AllSuccessStories() {
                 page === pagination.page
                   ? "bg-purple-500 text-white shadow-lg"
                   : page === "..."
-                    ? "text-gray-400 cursor-not-allowed"
-                    : "text-gray-600 hover:bg-gray-100"
+                  ? "text-gray-400 cursor-not-allowed"
+                  : "text-gray-600 hover:bg-gray-100"
               }`}
             >
               {page}
@@ -226,7 +222,7 @@ export function AllSuccessStories() {
           disabled={pagination.page >= pagination.pageCount}
           className="flex items-center gap-2"
         >
-          {tP("next")}
+          Next
           <ChevronRight className="w-4 h-4" />
         </Button>
       </div>
@@ -235,7 +231,7 @@ export function AllSuccessStories() {
 
   if (loading && pagination.page === 1) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50/30">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-purple-50/30">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col items-center justify-center min-h-[400px]">
@@ -249,7 +245,7 @@ export function AllSuccessStories() {
 
   if (error && currentSuccessStories.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50/30">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-purple-50/30">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
@@ -271,12 +267,12 @@ export function AllSuccessStories() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50/30 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-purple-50/30 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-400/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-400/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-400/3 to-purple-400/3 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-linear-to-r from-blue-400/3 to-purple-400/3 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 py-16 relative z-10">
@@ -291,7 +287,7 @@ export function AllSuccessStories() {
             >
               <Users className="w-5 h-5 text-yellow-600" />
               <span className="text-yellow-600 font-semibold text-sm uppercase tracking-wide">
-                {t("title")}
+                Success Stories
               </span>
             </motion.div>
 
@@ -301,7 +297,7 @@ export function AllSuccessStories() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
             >
-              {t("heading")}
+              What Our Clients Say
             </motion.h1>
 
             <motion.p
@@ -310,7 +306,8 @@ export function AllSuccessStories() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8"
             >
-              {t("description")}
+              Real stories from real people who achieved their dreams with our
+              support
             </motion.p>
 
             {/* Search and Actions */}
@@ -338,7 +335,7 @@ export function AllSuccessStories() {
                 disabled={loading}
               >
                 <Calendar className="w-4 h-4" />
-                {loading ? "Refreshing..." : `${t("refresh")}`}
+                {loading ? "Refreshing..." : "Refresh Stories"}
               </Button>
             </motion.div>
           </div>

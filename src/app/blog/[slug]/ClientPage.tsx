@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useLocale } from "next-intl";
 import { BlogItem } from "@/lib/strapi";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -21,28 +20,20 @@ import {
   Loader2,
   AlertCircle,
   MessageCircle,
-  BookOpen,
+  BookOpen
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import "highlight.js/styles/github.css";
 import { LatestBlogPost } from "@/components/blogs/LatestBlogPost";
-import { StructuredData } from "@/components/seo/StructuredData";
-import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
-import {
-  generateArticleSchema,
-  organizationSchema,
-} from "@/lib/seo/structuredData";
 
 interface BlogArticleClientProps {
   slug: string;
-  lang?: string;
 }
 
 export function BlogArticleClient({ slug }: BlogArticleClientProps) {
   const [blog, setBlog] = useState<BlogItem | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const locale = useLocale();
   const URL = process.env.NEXT_PUBLIC_CMS_URL;
 
   useEffect(() => {
@@ -51,9 +42,7 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
         setLoading(true);
         setError(null);
 
-        const response = await fetch(
-          `/api/single-blog?slug=${slug}&locale=${locale}`
-        );
+        const response = await fetch(`/api/single-blog?slug=${slug}&locale=en`);
 
         if (!response.ok) {
           if (response.status === 404) {
@@ -77,7 +66,7 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
     if (slug) {
       fetchSingleBlog();
     }
-  }, [slug, locale]);
+  }, [slug]);
 
   // Extract data with fallback handling
   const blogData = blog
@@ -95,7 +84,7 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
         blog_image:
           blog.attributes?.blog_image?.data?.attributes?.url ||
           blog.blog_image?.url ||
-          null,
+          null
       }
     : null;
 
@@ -108,7 +97,7 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
         month: "long",
         day: "numeric",
         hour: "2-digit",
-        minute: "2-digit",
+        minute: "2-digit"
       });
     } catch {
       return "";
@@ -131,7 +120,7 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
         await navigator.share({
           title: blogData.title,
           text: `Check out this blog post: ${blogData.title}`,
-          url: window.location.href,
+          url: window.location.href
         });
       } catch (err) {
         console.log("Error sharing:", err);
@@ -143,7 +132,7 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50/30 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-purple-50/30 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin text-yellow-500 mx-auto mb-4" />
         </div>
@@ -153,7 +142,7 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
 
   if (error || !blogData) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50/30 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-purple-50/30 flex items-center justify-center">
         <div className="text-center max-w-md mx-auto px-4">
           <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
@@ -162,7 +151,7 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
           <p className="text-gray-600 mb-6">
             {error || "The requested blog post could not be found."}
           </p>
-          <Link href={`/${locale}/blog`}>
+          <Link href={`/blog`}>
             <Button className="flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" />
               Back to Blog
@@ -175,35 +164,16 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
 
   const tags = parseTags(blogData.tags);
 
-  const articleSchema = generateArticleSchema(
-    blogData.title,
-    blogData.contents.substring(0, 160) + "...",
-    blogData.updatedAt,
-    blogData.updatedAt,
-    blogData.blog_image || undefined
-  );
-
-  const structuredData = [organizationSchema, articleSchema];
-
-  const breadcrumbItems = [
-    { name: "Blog", href: `/${locale}/blog` },
-    { name: blogData.title, href: `/${locale}/blog/${blogData.slug}` },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50/30 flex items-center justify-center">
-      <StructuredData data={structuredData} />
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-purple-50/30 flex items-center justify-center">
       <div className="max-w-7xl grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-4 mx-auto">
         <article className="container mx-auto px-2 py-12">
-          <div className="mb-6">
-            <Breadcrumbs items={breadcrumbItems} />
-          </div>
           {blogData.blog_image && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="relative w-full h-64 md:h-[30rem] rounded-2xl overflow-hidden mb-8 shadow-xl"
+              className="relative w-full h-64 md:h-120 rounded-2xl overflow-hidden mb-8 shadow-xl"
             >
               <Image
                 src={`${URL}${blogData.blog_image}`}
@@ -212,7 +182,7 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
                 className="object-cover"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
             </motion.div>
           )}
 
@@ -240,8 +210,7 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
                 {blogData.comments_count} comments
               </div>
               <div className="flex items-center gap-2 bg-green-50 rounded-full px-4 py-2 text-green-600">
-                <Clock className="w-4 h-4" />
-                5 min read
+                <Clock className="w-4 h-4" />5 min read
               </div>
             </div>
 
@@ -341,8 +310,8 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
                     const finalHref = isAbsoluteUrl
                       ? href
                       : href.startsWith("/")
-                        ? href
-                        : `https://${href}`;
+                      ? href
+                      : `https://${href}`;
 
                     return (
                       <a
@@ -361,7 +330,7 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
                         }
                       />
                     );
-                  },
+                  }
                 }}
               >
                 {blogData.contents}
@@ -388,7 +357,7 @@ export function BlogArticleClient({ slug }: BlogArticleClientProps) {
                   Share
                 </Button>
               </div>
-              <Link href={`/${locale}/blog`}>
+              <Link href={`/blog`}>
                 <Button variant="ghost" className="flex items-center gap-2">
                   <ArrowLeft className="w-4 h-4" />
                   Back to All Posts

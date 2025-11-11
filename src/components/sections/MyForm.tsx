@@ -9,11 +9,10 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from "@/components/ui/select";
 import Flag from "react-country-flag";
 import countryData from "@/constants/countrycode.json";
-import { useLocale, useTranslations } from "next-intl";
 import { Button } from "../ui/button";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -26,8 +25,6 @@ interface CountryCode {
 }
 
 export function MyForm() {
-  const locale = useLocale();
-  const t = useTranslations("pages.myForm");
   const [detectedCountry, setDetectedCountry] = useState<CountryCode>(
     countryData.find((c) => c.iso === "US") || countryData[0]
   );
@@ -57,7 +54,7 @@ export function MyForm() {
     email: "",
     phone: "",
     userType: "",
-    acceptTerms: false,
+    acceptTerms: false
   });
 
   const handleInputChange = (field: string, value: string | boolean) => {
@@ -71,7 +68,7 @@ export function MyForm() {
       email: "",
       phone: "",
       userType: "",
-      acceptTerms: false,
+      acceptTerms: false
     });
     setSelectedCountry(detectedCountry); // reset to detected country, not hardcoded "US"
   };
@@ -88,7 +85,6 @@ export function MyForm() {
       !formData.userType ||
       !formData.acceptTerms
     ) {
-      console.error(t("errorMessage"));
       return;
     }
 
@@ -104,18 +100,18 @@ export function MyForm() {
         phone: `${selectedCountry.code} ${formData.phone}`,
         option: formData.userType,
         subject: "Enquiry : Know More About Your Services",
-        message: "I am filling this form to know more about your serwis.",
+        message: "I am filling this form to know more about your serwis."
       });
       console.log("data", res);
       if (res.status === 200 || res.status === 201) {
         clearForm();
         // window.alert(t("successMessage"));
-        toast.success(t("successMessage"), {
+        toast.success("Form Submitted Successfully", {
           style: {
             borderRadius: "10px",
             background: "#fecc00",
-            color: "#111827",
-          },
+            color: "#111827"
+          }
         });
       }
     } catch (error) {
@@ -124,8 +120,8 @@ export function MyForm() {
         style: {
           borderRadius: "10px",
           background: "#fecc00",
-          color: "#111827",
-        },
+          color: "#111827"
+        }
       });
     } finally {
       // Set loading to false when API call completes (success or error)
@@ -137,50 +133,50 @@ export function MyForm() {
     <div className="w-full max-w-md mx-auto">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 gap-4">
-          <FormField label={t("firstName")} required>
+          <FormField label="First Name" required>
             <div className="font-inter">
               <Input
-                placeholder={t("firstNamePlaceholder")}
+                placeholder="First Name"
                 value={formData.firstName}
                 onChange={(e) => handleInputChange("firstName", e.target.value)}
-                className={`focus-visible:ring-yellow-500 focus-visible:border-yellow-500 font-inter focus-visible:ring-[2px] ${fontInter.className}`}
+                className={`focus-visible:ring-yellow-500 focus-visible:border-yellow-500 font-inter focus-visible:ring-2 ${fontInter.className}`}
                 required
               />
             </div>
           </FormField>
 
-          <FormField label={t("lastName")} required>
+          <FormField label="Last Name" required>
             <div className="font-inter">
               <Input
-                placeholder={t("lastNamePlaceholder")}
+                placeholder="Last Name"
                 value={formData.lastName}
                 onChange={(e) => handleInputChange("lastName", e.target.value)}
-                className={`focus-visible:ring-yellow-500 focus-visible:border-yellow-500 font-inter focus-visible:ring-[2px] ${fontInter.className}`}
+                className={`focus-visible:ring-yellow-500 focus-visible:border-yellow-500 font-inter focus-visible:ring-2 ${fontInter.className}`}
                 required
               />
             </div>
           </FormField>
         </div>
 
-        <FormField label={t("email")} required>
+        <FormField label="Email" required>
           <div className="font-inter">
             <Input
               type="email"
-              placeholder={t("emailPlaceholder")}
+              placeholder="Email"
               value={formData.email}
               onChange={(e) => handleInputChange("email", e.target.value)}
-              className={`focus-visible:ring-yellow-500 focus-visible:border-yellow-500 font-inter focus-visible:ring-[2px] ${fontInter.className}`}
+              className={`focus-visible:ring-yellow-500 focus-visible:border-yellow-500 font-inter focus-visible:ring-2 ${fontInter.className}`}
               required
             />
           </div>
         </FormField>
 
-        <FormField label={t("phoneNumber")} required>
+        <FormField label="Phone" required>
           <div className="font-inter">
             <div className="flex gap-2 md:flex-row flex-col">
               <Select
                 value={selectedCountry.iso}
-                onValueChange={(value) => {
+                onValueChange={(value: any) => {
                   const country = countryData.find((c) => c.iso === value);
                   if (country) setSelectedCountry(country);
                 }}
@@ -218,7 +214,7 @@ export function MyForm() {
 
               <Input
                 type="tel"
-                placeholder={t("phonePlaceholder")}
+                placeholder="Phone Number"
                 value={formData.phone}
                 onChange={(e) => handleInputChange("phone", e.target.value)}
                 className={`flex-1 font-inter ${fontInter.className}`}
@@ -228,23 +224,21 @@ export function MyForm() {
           </div>
         </FormField>
 
-        <FormField label={t("userType")} required>
+        <FormField label="User Type" required>
           <div className="font-inter">
             <Select
               value={formData.userType}
-              onValueChange={(value) => handleInputChange("userType", value)}
+              onValueChange={(value: any) =>
+                handleInputChange("userType", value)
+              }
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder={t("userTypePlaceholder")} />
+                <SelectValue placeholder="User Type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="jobseeker">
-                  {t("userTypes.jobseeker")}
-                </SelectItem>
-                <SelectItem value="agent">{t("userTypes.agent")}</SelectItem>
-                <SelectItem value="employer">
-                  {t("userTypes.employer")}
-                </SelectItem>
+                <SelectItem value="jobseeker">JobSeeker</SelectItem>
+                <SelectItem value="agent">Agent</SelectItem>
+                <SelectItem value="employer">Employer</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -263,14 +257,14 @@ export function MyForm() {
             htmlFor="acceptTerms"
             className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
           >
-            {t("termsText")}{" "}
+            {"I accept the"}{" "}
             <a
-              href={`/${locale}/terms-conditions`}
+              href={`/terms-conditions`}
               className="text-yellow-600 hover:text-yellow-700 underline font-medium"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {t("termsLink")}
+              Terms and Conditions
             </a>
           </label>
         </div>
@@ -281,7 +275,7 @@ export function MyForm() {
           className={`w-full font-montserrat font-semibold cursor-pointer  hover:bg-yellow-400 hover:text-black hover:border-yellow-400 disabled:opacity-50 disabled:cursor-not-allowed ${fontPoppins.className}`}
           variant="brandOutline"
         >
-          {loading ? t("loadingMessage") : t("submitButton")}
+          {loading ? "submitting..." : "Submit"}
         </Button>
       </form>
     </div>

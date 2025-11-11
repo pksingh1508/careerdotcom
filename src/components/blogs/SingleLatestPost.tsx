@@ -1,8 +1,6 @@
-import React from "react";
 import Link from "next/link";
 import { BlogItem } from "@/lib/strapi";
 import Image from "next/image";
-import { useLocale } from "next-intl";
 
 interface LatestPostProps {
   blog: BlogItem;
@@ -15,7 +13,6 @@ export function SingleLatestPost({ blog }: LatestPostProps) {
   const likes_count = blog.attributes?.likes_count || blog.likes_count || 0;
   const slug = blog.attributes?.slug || blog.slug || "";
   const image_url = blog.blog_image?.url || "";
-  const locale = useLocale();
   const URL = process.env.NEXT_PUBLIC_CMS_URL;
 
   // Format the date to show like "03 Jun"
@@ -24,17 +21,17 @@ export function SingleLatestPost({ blog }: LatestPostProps) {
     const date = new Date(dateString);
     const options: Intl.DateTimeFormatOptions = {
       day: "2-digit",
-      month: "short",
+      month: "short"
     };
     return date.toLocaleDateString("en-US", options);
   };
 
   return (
-    <Link href={`/${locale}/blog/${slug}`} className="block max-w-2xl">
+    <Link href={`/blog/${slug}`} className="block max-w-2xl">
       <article className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 p-1">
         <div className="flex gap-4 items-start">
           {/* Small Blog Image - Left Side */}
-          <div className="flex-shrink-0 w-27 h-20 overflow-hidden rounded-lg">
+          <div className="shrink-0 w-27 h-20 overflow-hidden rounded-lg">
             {image_url ? (
               <Image
                 src={`${URL}${image_url}`}

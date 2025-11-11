@@ -1,8 +1,6 @@
 "use client";
 
-import * as React from "react";
 import { motion, Variants } from "framer-motion";
-import { useTranslations } from "next-intl";
 import {
   MapPin,
   Phone,
@@ -11,30 +9,27 @@ import {
   Facebook,
   Twitter,
   Linkedin,
-  Instagram,
+  Instagram
 } from "lucide-react";
 import { ContactForm } from "./ContactForm";
 
 export function ContactContainer() {
-  const t = useTranslations("pages.contact");
-  const tF = useTranslations("pages.contact.follow");
-
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
+        delayChildren: 0.1
+      }
+    }
   };
 
   const itemVariants: Variants = {
     hidden: {
       opacity: 0,
       y: 30,
-      scale: 0.95,
+      scale: 0.95
     },
     visible: {
       opacity: 1,
@@ -42,9 +37,9 @@ export function ContactContainer() {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
-      },
-    },
+        ease: "easeOut"
+      }
+    }
   };
 
   const iconVariants: Variants = {
@@ -54,70 +49,70 @@ export function ContactContainer() {
       rotate: 5,
       transition: {
         duration: 0.3,
-        ease: "easeOut",
-      },
-    },
+        ease: "easeOut"
+      }
+    }
   };
 
   const contactItems = [
     {
       icon: MapPin,
-      title: t("info.address.title"),
+      title: "Address",
       content: [
-        t("info.address.street"),
-        t("info.address.zipCode"),
-        t("info.address.city"),
+        "Street: Mennica Legacy Tower, Prosta 20",
+        "ZIP code: 00-850",
+        "City: Warszawa"
       ],
-      color: "from-yellow-500 to-yellow-500",
+      color: "from-yellow-500 to-yellow-500"
     },
     {
       icon: Phone,
-      title: t("info.callUs.title"),
-      content: [t("info.callUs.phone")],
+      title: "Call Us",
+      content: ["+48 787 277 550"],
       color: "from-yellow-500 to-yellow-500",
-      link: `tel:${t("info.callUs.phone")}`,
+      link: `tel:+48787277550`
     },
     {
       icon: MessageCircle,
-      title: t("info.whatsapp.title"),
-      content: [t("info.whatsapp.number")],
+      title: "WhatsApp",
+      content: ["+48 787 277 555"],
       color: "from-yellow-500 to-yellow-500",
-      link: `https://wa.me/${t("info.whatsapp.number")}`,
+      link: `https://wa.me/48787277555`
     },
     {
       icon: Mail,
-      title: t("info.email.title"),
-      content: [t("info.email.address")],
+      title: "Email",
+      content: ["office@eucareerserwis.com"],
       color: "from-yellow-500 to-yellow-500",
-      link: `mailto:${t("info.email.address")}`,
-    },
+      link: `mailto:office@eucareerserwis.pl`
+    }
   ];
 
   const socialLinks = [
     {
       icon: Facebook,
       href: "https://www.facebook.com/eucareerserwis/",
-      color: "hover:bg-yellow-300 hover:text-black",
+      color: "hover:bg-yellow-300 hover:text-black"
     },
     {
       icon: Twitter,
       href: "https://x.com/eucareerserwis",
-      color: "hover:bg-yellow-300 hover:text-black",
+      color: "hover:bg-yellow-300 hover:text-black"
     },
     {
       icon: Linkedin,
       href: "https://www.linkedin.com/company/eu-career-serwis",
-      color: "hover:bg-yellow-300 hover:text-black",
+      color: "hover:bg-yellow-300 hover:text-black"
     },
     {
       icon: Instagram,
       href: "https://www.instagram.com/eucareerserwis/",
-      color: "hover:bg-yellow-300 hover:text-black",
-    },
+      color: "hover:bg-yellow-300 hover:text-black"
+    }
   ];
 
   return (
-    <section className="w-full bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 py-10">
+    <section className="w-full bg-linear-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 py-10">
       <div className="container mx-auto max-w-7xl px-4">
         {/* Header */}
         <motion.div
@@ -128,11 +123,11 @@ export function ContactContainer() {
           viewport={{ once: true }}
         >
           <h1 className="text-4xl lg:text-5xl font-bold font-playfair text-gray-900 dark:text-white mb-2 tracking-tight">
-            {t("title")}
+            Contact Us
           </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 mx-auto mb-6"></div>
+          <div className="w-24 h-1 bg-linear-to-r from-yellow-400 to-yellow-600 mx-auto mb-6"></div>
           <p className="text-lg font-inter text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            {t("description")}
+            Sign up for a free expert consultation
           </p>
         </motion.div>
         <div className="container mx-auto max-w-7xl px-4">
@@ -153,9 +148,9 @@ export function ContactContainer() {
                     className="text-lg font-bold font-playfair text-gray-900 dark:text-white"
                     variants={itemVariants}
                   >
-                    {tF("title")}
+                    Follow Us
                   </motion.h3>
-                  <div className="w-8 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
+                  <div className="w-8 h-1 bg-linear-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
                 </div>
 
                 <motion.div
@@ -172,15 +167,15 @@ export function ContactContainer() {
                       target="_blank"
                       whileTap={{ scale: 0.95 }}
                     >
-                      <social.icon className="w-4 h-4 flex-shrink-0" />
+                      <social.icon className="w-4 h-4 shrink-0" />
                       <span className="text-sm font-medium group-hover:translate-x-1 transition-transform">
                         {social.icon === Facebook
                           ? "Facebook"
                           : social.icon === Twitter
-                            ? "Twitter"
-                            : social.icon === Linkedin
-                              ? "LinkedIn"
-                              : "Instagram"}
+                          ? "Twitter"
+                          : social.icon === Linkedin
+                          ? "LinkedIn"
+                          : "Instagram"}
                       </span>
                     </motion.a>
                   ))}
@@ -209,9 +204,9 @@ export function ContactContainer() {
                     className="text-2xl font-bold font-playfair text-gray-900 dark:text-white"
                     variants={itemVariants}
                   >
-                    {t("info.title")}
+                    Reach Our Expert Team
                   </motion.h2>
-                  <div className="w-12 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
+                  <div className="w-12 h-1 bg-linear-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
                 </div>
 
                 {/* Contact Items */}
@@ -224,7 +219,7 @@ export function ContactContainer() {
                       whileHover={{ x: 3 }}
                     >
                       <motion.div
-                        className={`p-2.5 rounded-full bg-gradient-to-r ${item.color} shadow-md flex-shrink-0`}
+                        className={`p-2.5 rounded-full bg-linear-to-r ${item.color} shadow-md shrink-0`}
                         variants={iconVariants}
                         initial="rest"
                         whileHover="hover"
@@ -240,7 +235,7 @@ export function ContactContainer() {
                           {item.content.map((line, lineIndex) => (
                             <p
                               key={lineIndex}
-                              className="text-xs text-gray-600 dark:text-gray-300 font-inter break-words"
+                              className="text-xs text-gray-600 dark:text-gray-300 font-inter wrap-break-words"
                             >
                               {item.link ? (
                                 <a
@@ -288,9 +283,9 @@ export function ContactContainer() {
                     className="text-2xl md:text-3xl font-bold font-playfair text-gray-900 dark:text-white"
                     variants={itemVariants}
                   >
-                    {t("info.title")}
+                    Reach Our Expert Team
                   </motion.h2>
-                  <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
+                  <div className="w-16 h-1 bg-linear-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
                 </div>
 
                 {/* Contact Items */}
@@ -303,7 +298,7 @@ export function ContactContainer() {
                       whileHover={{ x: 5 }}
                     >
                       <motion.div
-                        className={`p-3 rounded-full bg-gradient-to-r ${item.color} shadow-lg flex-shrink-0`}
+                        className={`p-3 rounded-full bg-linear-to-r ${item.color} shadow-lg shrink-0`}
                         variants={iconVariants}
                         initial="rest"
                         whileHover="hover"
@@ -319,7 +314,7 @@ export function ContactContainer() {
                           {item.content.map((line, lineIndex) => (
                             <p
                               key={lineIndex}
-                              className="text-gray-600 dark:text-gray-300 font-inter break-words"
+                              className="text-gray-600 dark:text-gray-300 font-inter wrap-break-words"
                             >
                               {item.link ? (
                                 <a
@@ -350,7 +345,7 @@ export function ContactContainer() {
                 >
                   Follow Us
                 </motion.h3>
-                <div className="w-12 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
+                <div className="w-12 h-1 bg-linear-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
 
                 <motion.div
                   className="flex flex-wrap gap-4"
@@ -371,10 +366,10 @@ export function ContactContainer() {
                         {social.icon === Facebook
                           ? "Facebook"
                           : social.icon === Twitter
-                            ? "Twitter"
-                            : social.icon === Linkedin
-                              ? "LinkedIn"
-                              : "Instagram"}
+                          ? "Twitter"
+                          : social.icon === Linkedin
+                          ? "LinkedIn"
+                          : "Instagram"}
                       </span>
                     </motion.a>
                   ))}
