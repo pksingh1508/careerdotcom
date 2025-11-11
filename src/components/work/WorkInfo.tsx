@@ -10,7 +10,7 @@ export default function WorkInfo() {
         <h1
           className={`text-3xl text-center font-bold text-gray-900 mb-4 ${fontPoppins.className}`}
         >
-          EU Career Serwis Works
+          EU Career Serwis - International Employment Company
         </h1>
 
         {/* Underline decoration */}
@@ -25,7 +25,7 @@ export default function WorkInfo() {
 
         {/* Description */}
         <p
-          className={`text-gray-600 leading-relaxed max-w-6xl text-base text-justify hyphens-auto ${fontInter.className}`}
+          className={`text-gray-600 max-w-6xl text-base text-justify  ${fontInter.className}`}
         >
           At EU Career Serwis, we provide safe and legal non-skilled job
           opportunities in many European countries. No advanced qualifications

@@ -1,6 +1,13 @@
-import type { Metadata } from "next";
 import { AllVisaStampImage } from "@/components/visaStamp/AllVisaStampImage";
 import { getAllStampImages } from "@/lib/strapi";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Visa Stamps & Case Approvals",
+  description:
+    "Browse verified EU Career Serwis visa stamp approvals and learn how we support applicants through embassy interviews.",
+  canonicalPath: "/visa-stamp"
+});
 
 async function getInitialStamps() {
   const token = process.env.STRAPI_ACCESS_TOKEN;

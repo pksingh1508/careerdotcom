@@ -1,18 +1,13 @@
 import { CommonContact } from "@/components/sections/CommonContact";
 import { AllTestimonials } from "@/components/testimonials/AllTestimonials";
-import { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Client Testimonials | EU Career Serwis",
+export const metadata = buildMetadata({
+  title: "Client Testimonials",
   description:
-    "Read what our clients say about their experience with EU Career Serwis. Real stories from people who achieved their dreams with our immigration and recruitment services.",
-  keywords: [
-    "testimonials",
-    "client reviews",
-    "immigration success stories",
-    "EU Career Serwis reviews",
-  ],
-};
+    "Read EU Career Serwis client testimonials featuring successful immigration journeys and employer partnerships.",
+  canonicalPath: "/testimonials"
+});
 
 export default function TestimonialsPage() {
   return (

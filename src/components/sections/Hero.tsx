@@ -47,7 +47,9 @@ export function Hero() {
               <h2
                 className={`text-2xl font-extrabold text-gray-700 ${fontPoppins.className}`}
               >
-                How can we support you?
+                How can we support you as an
+                <br />
+                International employment company?
               </h2>
             </div>
 

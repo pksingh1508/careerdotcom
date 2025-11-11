@@ -10,8 +10,8 @@ export default function JobseekerInfo() {
         <h1
           className={`text-3xl text-center font-bold text-gray-900 mb-4 ${fontPoppins.className}`}
         >
-          Start Your European Career accompanying EU Career Serwis –
-          Opportunities Await in Poland
+          Start Your European Career with EU Career Serwis – International
+          Employment Company
         </h1>
 
         {/* Underline decoration */}

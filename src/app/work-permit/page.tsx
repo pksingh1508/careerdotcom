@@ -1,5 +1,13 @@
 import { AllPermitImage } from "@/components/work_permit/AllPermitImage";
 import { getAllPermitImages } from "@/lib/strapi";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: "European Work Permit Support",
+  description:
+    "View EU Career Serwis work permit approvals and learn how we manage documentation, compliance, and processing timelines.",
+  canonicalPath: "/work-permit"
+});
 
 async function getInitialPermits() {
   const token = process.env.STRAPI_ACCESS_TOKEN;

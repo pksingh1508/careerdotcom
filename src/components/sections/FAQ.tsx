@@ -8,9 +8,17 @@ import {
 } from "@/components/ui/accordion";
 import { faqContent } from "@/data/faqData";
 import Link from "next/link";
+import Script from "next/script";
+import { createFaqSchema } from "@/lib/schema";
 
 export function FAQ() {
   const { title, subtitle, questions, cta } = faqContent;
+  const faqSchema = createFaqSchema(
+    questions.map((item) => ({
+      question: item.question,
+      answer: item.answer
+    }))
+  );
 
   return (
     <section className="relative py-16 md:py-24 lg:py-32  overflow-hidden">
@@ -55,12 +63,19 @@ export function FAQ() {
               <p className="text-gray-600 mb-6 text-sm md:text-base">
                 {cta.description}
               </p>
-              <button className="bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-6 md:px-8 py-3 md:py-4 text-sm md:text-base font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <button className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-6 md:px-8 py-3 md:py-4 text-sm md:text-base font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 <Link href="/contact">{cta.button}</Link>
               </button>
             </div>
           </div>
         </div>
+        <Script
+          id="homepage-faq-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+        >
+          {JSON.stringify(faqSchema)}
+        </Script>
       </div>
     </section>
   );
