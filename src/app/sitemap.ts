@@ -22,6 +22,15 @@ export const revalidate = 21600; // 6 hours
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig.url;
   const now = new Date();
+  const sanitizeSlugs = (slugs: string[]) =>
+    Array.from(
+      new Set(
+        slugs
+          .filter((slug) => typeof slug === "string")
+          .map((slug) => slug.trim())
+          .filter(Boolean)
+      )
+    );
 
   const staticRoutes = [
     { path: "/", priority: 1, frequency: "daily" as const },
@@ -49,10 +58,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route.priority
   }));
 
-  const [blogSlugs, newsSlugs] = await Promise.all([
+  const [rawBlogSlugs, rawNewsSlugs] = await Promise.all([
     getSlugs("blogs"),
     getSlugs("khabars")
   ]);
+  const blogSlugs = sanitizeSlugs(rawBlogSlugs);
+  const newsSlugs = sanitizeSlugs(rawNewsSlugs);
 
   const blogRoutes = blogSlugs.map((slug) => ({
     url: `${baseUrl}/blog/${slug}`,
