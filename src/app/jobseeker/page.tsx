@@ -7,7 +7,7 @@ import { NewsSection } from "@/components/immigration_faq/NewsSection";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Jobs in Europe for Skilled & Semi-Skilled Talent",
+  title: "Work in Europe - Recruitment, Work Visa, and Job Placement Support",
   description:
     "Explore EU Career Serwis job openings across logistics, construction, hospitality, and seasonal work with visa-ready support.",
   canonicalPath: "/jobseeker"

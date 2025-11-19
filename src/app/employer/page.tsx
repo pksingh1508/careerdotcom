@@ -7,7 +7,7 @@ import { NewsSection } from "@/components/immigration_faq/NewsSection";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Hire International Talent in Europe",
+  title: "Hire Skilled Worker in Europe with Recruitment Solution",
   description:
     "EU Career Serwis helps European employers source, onboard, and retain skilled workers with verified compliance and legal support.",
   canonicalPath: "/employer"

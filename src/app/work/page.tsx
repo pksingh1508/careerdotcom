@@ -3,7 +3,8 @@ import { WorkContent } from "@/components/work/WorkContent";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Work in Europe with EU Career Serwis",
+  title:
+    "International Recruitment Agency in Poland for Work Visa & Work Permit Support",
   description:
     "Navigate European relocation, compliance, and placement services with EU Career Serwis work programs.",
   canonicalPath: "/work"

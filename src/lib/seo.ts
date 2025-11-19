@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 
 const APP_BASE_URL = "https://eucareerserwis.com";
 const DEFAULT_SEO_TITLE =
-  "Europe Leading Immigration and International Employment Consultancy";
+  "International Recruitment company in Europe For Skilled & Unskilled Workers";
 
 const keywordList = [
-  "Europe's Leading Immigration Consultancy",
+  "Europe Leading Immigration Consultancy",
   "International Employment Consultancy Europe",
   "EU Career Serwis - International Employment Company",
   "Start Your European Career",
@@ -84,7 +84,7 @@ export const baseMetadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: DEFAULT_SEO_TITLE,
-    template: `%s | ${siteConfig.name}`
+    template: ``
   },
   description: siteConfig.description,
   keywords: keywordList,
@@ -129,9 +129,7 @@ export function buildMetadata({
   canonicalPath,
   image
 }: BuildMetadataArgs = {}): Metadata {
-  const resolvedTitle = title
-    ? `${title} | ${siteConfig.name}`
-    : DEFAULT_SEO_TITLE;
+  const resolvedTitle = title ? `${title}` : DEFAULT_SEO_TITLE;
   const resolvedDescription = description || siteConfig.description;
   const canonicalUrl = canonicalPath
     ? new URL(canonicalPath, siteConfig.url).toString()

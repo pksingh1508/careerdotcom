@@ -6,7 +6,7 @@ import { NewsSection } from "@/components/immigration_faq/NewsSection";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Migrate to Europe with EU Career Serwis",
+  title: "International Recruitment Serwis in Europe with A to Z Support",
   description:
     "Plan your move abroad with EU Career Serwis immigration guidance, documentation support, and employer connections.",
   canonicalPath: "/migrate"
