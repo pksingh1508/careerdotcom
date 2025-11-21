@@ -4,7 +4,7 @@ import { GovernmentLinks } from "@/components/sections/GovernmentLinks";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Contact EU Career Serwis",
+  title: "Contact Us",
   description:
     "Contact EU Career Serwis for recruitment support, immigration guidance, or employer staffing solutions across Europe.",
   canonicalPath: "/contact"
