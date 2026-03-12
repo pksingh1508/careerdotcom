@@ -28,9 +28,9 @@ export function Footer() {
   ];
 
   const companyInfoLinks = [
-    { href: "#1", label: "NIP Number - 70112281130" },
-    { href: "#2", label: "KRS Number - 0001133506" },
-    { href: "#3", label: "REGON Number - 529955956" }
+    { href: "#1", label: "NIP Number - 7011295066" },
+    { href: "#2", label: "KRS Number - 0001217587" },
+    { href: "#3", label: "REGON Number - 543746259" }
   ];
 
   const successStoryLinks = [
